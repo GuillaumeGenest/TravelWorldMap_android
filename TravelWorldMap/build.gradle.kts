@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
     // Kotlin is now built-in with AGP 9.0+
 }
 
@@ -9,6 +10,10 @@ android {
         version = release(36) {
             minorApiLevel = 1
         }
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     defaultConfig {
@@ -38,6 +43,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Compose BOM
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
