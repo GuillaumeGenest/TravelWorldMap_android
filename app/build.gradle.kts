@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    // TODO: Re-enable Kotlin when needed
+    // alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -33,6 +35,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    // TODO: Re-enable when Kotlin is added back
+    // kotlinOptions {
+    //     jvmTarget = "11"
+    // }
 }
 
 dependencies {

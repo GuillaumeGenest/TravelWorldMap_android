@@ -2,4 +2,5 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
+    // Kotlin is now built-in with AGP 9.0+, no need to apply kotlin-android plugin
 }
