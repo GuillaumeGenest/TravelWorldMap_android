@@ -13,10 +13,10 @@
         android:theme="@style/Theme.TravelWorldMap">
 
         <!-- Google Maps API Key -->
-        <!-- TODO: Replace with your own API key -->
+        <!-- Loaded from local.properties via build.gradle.kts -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyACJSI0Cw-3aiaba_ewXcNsXU1eVj1-vOc" />
+            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".MainActivity"
