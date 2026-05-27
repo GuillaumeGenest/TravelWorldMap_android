@@ -1,15 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
-    // TODO: Re-enable Kotlin when needed
-    // alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    // Kotlin is built-in with AGP 9.0+
 }
 
 android {
-    namespace = "com.guillaumegenest.travelworldmap"
+    namespace = "com.guillaumegenest.travelworldmap.demo"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
         }
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     defaultConfig {
@@ -35,16 +39,25 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    // TODO: Re-enable when Kotlin is added back
-    // kotlinOptions {
-    //     jvmTarget = "11"
-    // }
 }
 
 dependencies {
+    // TravelWorldMap library
+    implementation(project(":TravelWorldMap"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Compose BOM
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.activity.compose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

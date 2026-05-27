@@ -1,56 +1,42 @@
 # TravelWorldMap Android
 
-[![](https://jitpack.io/v/GuillaumeGenest/TravelWorldMap-Android.svg)](https://jitpack.io/#GuillaumeGenest/TravelWorldMap-Android)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.guillaumegenest/travelworldmap-android.svg)](https://central.sonatype.com/artifact/io.github.guillaumegenest/travelworldmap-android)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Android API](https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=26)
 
 An Android library for displaying an interactive world map with highlighted visited countries. Built with Jetpack Compose and Google Maps.
 
-> 🍎 **iOS Version:** This is the Android equivalent of the [TravelWorldMap Swift Package](https://github.com/GuillaumeGenest/TravelWorldMap)
+> **iOS Version:** This is the Android equivalent of the [TravelWorldMap Swift Package](https://github.com/GuillaumeGenest/TravelWorldMap)
 
-## ✨ Features
+## Features
 
-- 🗺️ **Interactive World Map** powered by Google Maps
-- 🎨 **Customizable Colors** for visited and unvisited countries
-- 🌍 **ISO 3166-1 Alpha-2** country code support (e.g., "FR", "US", "CA")
-- 📦 **Lightweight** - minimal dependencies
-- 🎯 **Jetpack Compose** native API
-- 🚀 **Easy Integration** - just add your Google Maps API key
-- 🔄 **Polygon & MultiPolygon** support for complex country shapes
+- **Interactive World Map** powered by Google Maps
+- **Customizable Colors** for visited and unvisited countries
+- **ISO 3166-1 Alpha-2** country code support (e.g., "FR", "US", "CA")
+- **Lightweight** - minimal dependencies
+- **Jetpack Compose** native API
+- **Easy Integration** - just add your Google Maps API key
+- **Polygon & MultiPolygon** support for complex country shapes
 
-## 📱 Requirements
+## Requirements
 
 - Android 8.0 (API 26) or higher
 - Jetpack Compose
 - Google Maps API key
 
-## 📦 Installation
-
-### Step 1: Add JitPack repository
-
-Add JitPack to your root `build.gradle.kts`:
-
-```kotlin
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://jitpack.io") }
-    }
-}
-```
-
-### Step 2: Add dependency
+## Installation
 
 Add the library to your module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.GuillaumeGenest:TravelWorldMap-Android:1.0.0")
+    implementation("io.github.guillaumegenest:travelworldmap-android:0.0.1")
 }
 ```
 
-## 🔑 Setup
+The library is published on Maven Central, which is already included by default in Android projects.
+
+## Setup
 
 ### 1. Get a Google Maps API Key
 
@@ -102,7 +88,7 @@ android {
 maps.api.key=AIzaSyC...
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Example
 
@@ -145,7 +131,7 @@ WorldMapView(
 )
 ```
 
-## 📚 API Reference
+## API Reference
 
 ### WorldMapView
 
@@ -172,18 +158,18 @@ fun WorldMapView(
 
 Uses **ISO 3166-1 Alpha-2** standard (2-letter codes):
 
-- 🇫🇷 France: `"FR"`
-- 🇺🇸 United States: `"US"`
-- 🇨🇦 Canada: `"CA"`
-- 🇯🇵 Japan: `"JP"`
-- 🇦🇺 Australia: `"AU"`
-- 🇬🇧 United Kingdom: `"GB"`
-- 🇩🇪 Germany: `"DE"`
+- France: `"FR"`
+- United States: `"US"`
+- Canada: `"CA"`
+- Japan: `"JP"`
+- Australia: `"AU"`
+- United Kingdom: `"GB"`
+- Germany: `"DE"`
 - ... and all other countries
 
 [Full list of country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
-## 🎨 Examples
+## Examples
 
 ### Travel Tracker App
 
@@ -227,7 +213,7 @@ fun ThemedWorldMap(visitedCountries: List<String>) {
 }
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### "Google Maps API Key Missing!" error
 
@@ -251,7 +237,7 @@ Make sure you've added the API key to your `AndroidManifest.xml`:
 Ensure you're using the correct **ISO 3166-1 Alpha-2** code (2 letters, uppercase).
 Example: Use `"FR"` for France, not `"FRA"` or `"France"`.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 TravelWorldMap/
@@ -265,11 +251,11 @@ TravelWorldMap/
 └── WorldMapView.kt             # Public Compose API
 ```
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -279,16 +265,16 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 🙏 Credits
+## Credits
 
 - **iOS Version:** [TravelWorldMap Swift Package](https://github.com/GuillaumeGenest/TravelWorldMap)
 - **GeoJSON Data:** [Natural Earth](https://www.naturalearthdata.com/)
 - **Maps SDK:** [Google Maps Platform](https://developers.google.com/maps)
 
-## 📧 Contact
+## Contact
 
 Guillaume Genest - [@GuillaumeGenest](https://github.com/GuillaumeGenest)
 
 ---
 
-Made with ❤️ for travelers
+Made with love for travelers

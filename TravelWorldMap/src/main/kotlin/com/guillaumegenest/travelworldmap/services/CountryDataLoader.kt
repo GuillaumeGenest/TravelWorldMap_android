@@ -1,6 +1,7 @@
 package com.guillaumegenest.travelworldmap.services
 
 import android.content.Context
+import com.guillaumegenest.travelworldmap.internal.Logger
 import com.guillaumegenest.travelworldmap.models.Country
 import com.guillaumegenest.travelworldmap.models.GeoJsonFeature
 import com.guillaumegenest.travelworldmap.models.GeoJsonGeometry
@@ -28,6 +29,36 @@ internal object CountryDataLoader {
     private var _countries: List<Country>? = null
 
     /**
+     * Gets a country by its name (case-insensitive).
+     *
+     * This method searches through the cached countries list to find a country
+     * whose name matches the provided string. If countries are not yet loaded,
+     * returns null.
+     *
+     * Equivalent to iOS's `getCountry(byName:)` method.
+     *
+     * @param byName The country name to search for (e.g., "France", "United States").
+     * @return The matching [Country] object, or null if not found or not loaded.
+     */
+    fun getCountry(byName: String): Country? {
+        return _countries?.firstOrNull {
+            it.name.equals(byName, ignoreCase = true)
+        }
+    }
+
+    /**
+     * Returns all cached countries.
+     *
+     * If countries have not been loaded yet via [loadCountries], returns an empty list.
+     * Equivalent to iOS's `getAllCountries()` method.
+     *
+     * @return List of all cached countries, or empty list if not loaded.
+     */
+    fun getAllCountries(): List<Country> {
+        return _countries ?: emptyList()
+    }
+
+    /**
      * Loads and parses all countries from the resources/countries.json file.
      *
      * This function reads the GeoJSON file from assets, parses it, and converts
@@ -43,7 +74,13 @@ internal object CountryDataLoader {
      */
     suspend fun loadCountries(context: Context): List<Country> {
         // Return cached data if available (like iOS singleton behavior)
-        _countries?.let { return it }
+        _countries?.let {
+            Logger.dataLoader.debug("DATALOADER | Cache hit - ${it.size} countries already loaded")
+            return it
+        }
+
+        Logger.dataLoader.info("DATALOADER | Loading GeoJSON - start")
+        val startTime = System.currentTimeMillis()
 
         return withContext(Dispatchers.IO) {
             // Read the GeoJSON file from assets/resources/
@@ -52,8 +89,11 @@ internal object CountryDataLoader {
                 .bufferedReader()
                 .use { it.readText() }
 
+            Logger.dataLoader.debug("DATALOADER | File read - ${jsonString.length} characters")
+
             // Parse GeoJSON into feature objects
             val features = parseGeoJson(jsonString)
+            Logger.dataLoader.debug("DATALOADER | Parsing completed - ${features.size} features")
 
             // Convert each feature to a Country
             val countries = features.map { feature ->
@@ -65,6 +105,9 @@ internal object CountryDataLoader {
                     coordinates = parseGeometry(feature.geometry)
                 )
             }
+
+            val duration = System.currentTimeMillis() - startTime
+            Logger.dataLoader.info("DATALOADER | Loading completed - ${countries.size} countries in ${duration}ms")
 
             // Cache the result
             _countries = countries
